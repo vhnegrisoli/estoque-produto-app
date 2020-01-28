@@ -12,9 +12,9 @@ import { createStore, applyMiddleware } from 'redux';
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />,
-            </Provider>,
-    document.getElementById('root')
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
 );
 serviceWorker.unregister();
