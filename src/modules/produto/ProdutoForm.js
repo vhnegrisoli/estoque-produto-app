@@ -13,6 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,17 +45,15 @@ export default function ProdutoForm() {
     <div className={classes}>
       <Container fixed>
         <Grid container item xs={12} spacing={3}>
-          <Grid item xs={12}>
-
-          </Grid>
+          <Grid item xs={12}></Grid>
         </Grid>
         <Grid container item xs={12} spacing={3}>
           <Grid item xs={12}>
             <Card className={classes.card}>
               <CardContent>
-                <h4>
-                  <strong><SportsEsportsIcon />{' '}Cadastro de Produtos</strong>
-                </h4>
+                <Typography variant="h6" gutterBottom>
+                  <SportsEsportsIcon /> Cadastro de Produtos
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
@@ -87,8 +86,7 @@ export default function ProdutoForm() {
                       labelId="demo-simple-select-helper-label"
                       id="demo-simple-select-helper"
                     >
-                      <MenuItem value="">
-                      </MenuItem>
+                      <MenuItem value=""></MenuItem>
                       <MenuItem value={1}>Livros</MenuItem>
                       <MenuItem value={2}>Jogos</MenuItem>
                       <MenuItem value={3}>Quadrinhos</MenuItem>
