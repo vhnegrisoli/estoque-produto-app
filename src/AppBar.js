@@ -105,14 +105,15 @@ export default function SearchAppBar() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <Link to="/menu" style={{ textDecoration: 'none' }}>
-          <ListItem button key="App Menu">
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <ListItem button key="Dashboard">
             <ListItemIcon>
               <AppsIcon />
             </ListItemIcon>
-            <ListItemText primary="App Menu" />
+            <ListItemText primary="Dashboard" />
           </ListItem>
         </Link>
+        <Divider />
         <Link to="/produtos" style={{ textDecoration: 'none' }}>
           <ListItem button key="Produtos">
             <ListItemIcon>
