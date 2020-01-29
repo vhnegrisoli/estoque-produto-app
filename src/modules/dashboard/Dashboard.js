@@ -7,7 +7,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { Bar } from 'react-chartjs-2';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import { HorizontalBar } from 'react-chartjs-2';
 import { Line } from 'react-chartjs-2';
 import Paper from '@material-ui/core/Paper';
@@ -155,7 +155,7 @@ export default function ProdutoForm() {
                 </CardHeader>
                 <CardContent>
                   <Grid direction="row" spacing={3} justify="center" alignItems="center">
-                    <Pie
+                    <Doughnut
                       data={data}
                       width={'100%'}
                       height={350}
