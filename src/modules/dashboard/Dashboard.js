@@ -23,6 +23,8 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     card: {
       maxWidth: '100%',
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.primary.contrastText,
     },
   },
   bullet: {
@@ -30,24 +32,99 @@ const useStyles = makeStyles(theme => ({
     margin: '0 2px',
     transform: 'scale(0.8)',
   },
-  paper: {
+  paperBlue: {
     padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+    backgroundColor: theme.palette.primary.main,
+  },
+  paperGreen: {
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    backgroundColor: theme.palette.success.main,
+  },
+  paperRed: {
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    backgroundColor: theme.palette.error.main,
+  },
+  typography: {
+    color: '#fff',
   },
 }));
+
+const doughnutData = {
+  labels: ['Red', 'Green', 'Yellow'],
+  datasets: [
+    {
+      data: [300, 50, 100],
+      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+      hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+    },
+  ],
+};
 
 const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
   datasets: [
     {
       label: 'My First dataset',
-      backgroundColor: 'rgba(255,99,132,0.2)',
-      borderColor: 'rgba(255,99,132,1)',
+      backgroundColor: 'rgba(1,999,10,0.2)',
+      borderColor: 'rgba(0,0,0,1)',
       borderWidth: 1,
-      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-      hoverBorderColor: 'rgba(255,99,132,1)',
+      hoverBackgroundColor: 'rgba(150,999,10,0.2)',
+      hoverBorderColor: 'rgba(10,100,100,1)',
       data: [65, 59, 80, 81, 56, 55, 40],
+    },
+  ],
+};
+
+const lineData = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: 'Finalizados',
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: 'rgba(75,192,192,0.4)',
+      borderColor: 'rgba(75,192,192,1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [65, 59, 80, 81, 56, 55, 40],
+    },
+    {
+      label: 'Cancelados',
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: 'rgba(800,113,250,2)',
+      borderColor: 'rgba(667,112,133,1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [55, 88, 10, 15, 43, 99, 20],
     },
   ],
 };
@@ -61,41 +138,51 @@ export default function ProdutoForm() {
         <div className={classes.root}>
           <Grid container spacing={3}>
             <Grid item xs>
-              <Paper className={classes.paper}>
-                Total de Produtos
-                <Typography variant="h3">
+              <Paper className={classes.paperBlue}>
+                <Typography variant="h6" className={classes.typography}>
+                  Total de Produtos
+                </Typography>
+                <Typography variant="h3" className={classes.typography}>
                   <strong>15</strong>
                 </Typography>
               </Paper>
             </Grid>
             <Grid item xs>
-              <Paper className={classes.paper}>
-                Produtos Ativos
-                <Typography variant="h3">
+              <Paper className={classes.paperGreen}>
+                <Typography variant="h6" className={classes.typography}>
+                  Produtos Ativos
+                </Typography>
+                <Typography variant="h3" className={classes.typography}>
                   <strong>9</strong>
                 </Typography>
               </Paper>
             </Grid>
             <Grid item xs>
-              <Paper className={classes.paper}>
-                Produtos Inativos
-                <Typography variant="h3">
+              <Paper className={classes.paperRed}>
+                <Typography variant="h6" className={classes.typography}>
+                  Produtos Inativos
+                </Typography>
+                <Typography variant="h3" className={classes.typography}>
                   <strong>6</strong>
                 </Typography>
               </Paper>
             </Grid>
             <Grid item xs>
-              <Paper className={classes.paper}>
-                Pedidos Cancelados
-                <Typography variant="h3">
+              <Paper className={classes.paperGreen}>
+                <Typography variant="h6" className={classes.typography}>
+                  Pedidos Finalizados
+                </Typography>
+                <Typography variant="h3" className={classes.typography}>
                   <strong>4</strong>
                 </Typography>
               </Paper>
             </Grid>
             <Grid item xs>
-              <Paper className={classes.paper}>
-                Pedidos Finalizados
-                <Typography variant="h3">
+              <Paper className={classes.paperRed}>
+                <Typography variant="h6" className={classes.typography}>
+                  Pedidos Cancelados
+                </Typography>
+                <Typography variant="h3" className={classes.typography}>
                   <strong>22</strong>
                 </Typography>
               </Paper>
@@ -133,7 +220,7 @@ export default function ProdutoForm() {
                 <CardContent>
                   <Grid direction="row" spacing={3} justify="center" alignItems="center">
                     <Line
-                      data={data}
+                      data={lineData}
                       width={'100%'}
                       height={350}
                       options={{
@@ -156,7 +243,7 @@ export default function ProdutoForm() {
                 <CardContent>
                   <Grid direction="row" spacing={3} justify="center" alignItems="center">
                     <Doughnut
-                      data={data}
+                      data={doughnutData}
                       width={'100%'}
                       height={350}
                       options={{
