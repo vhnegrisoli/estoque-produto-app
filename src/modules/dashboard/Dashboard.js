@@ -138,16 +138,6 @@ export default function ProdutoForm() {
         <div className={classes.root}>
           <Grid container spacing={3}>
             <Grid item xs>
-              <Paper className={classes.paperBlue}>
-                <Typography variant="h6" className={classes.typography}>
-                  Total de Produtos
-                </Typography>
-                <Typography variant="h3" className={classes.typography}>
-                  <strong>15</strong>
-                </Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs>
               <Paper className={classes.paperGreen}>
                 <Typography variant="h6" className={classes.typography}>
                   Produtos Ativos
@@ -184,6 +174,16 @@ export default function ProdutoForm() {
                 </Typography>
                 <Typography variant="h3" className={classes.typography}>
                   <strong>22</strong>
+                </Typography>
+              </Paper>
+            </Grid>
+            <Grid item xs>
+              <Paper className={classes.paperBlue}>
+                <Typography variant="h6" className={classes.typography}>
+                  Total de Produtos
+                </Typography>
+                <Typography variant="h3" className={classes.typography}>
+                  <strong>15</strong>
                 </Typography>
               </Paper>
             </Grid>

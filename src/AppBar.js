@@ -3,10 +3,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -18,6 +16,14 @@ import Drawer from '@material-ui/core/Drawer';
 import { Link } from 'react-router-dom';
 import AppsIcon from '@material-ui/icons/Apps';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import Clock from './modules/Clock';
+import ListIcon from '@material-ui/icons/List';
+import LabelOffIcon from '@material-ui/icons/LabelOff';
+import ContactMailIcon from '@material-ui/icons/ContactMail';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import PeopleIcon from '@material-ui/icons/People';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import ViewListIcon from '@material-ui/icons/ViewList';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,6 +32,15 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  clockTitle: {
+    flexGrow: 1,
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
+    textAlign: 'right',
+    marginTop: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
@@ -83,6 +98,12 @@ const useStyles = makeStyles(theme => ({
 export default function SearchAppBar() {
   const classes = useStyles();
 
+  const usuario = {
+    nome: 'Victor Hugo Negrisoli',
+    cpf: '103.324.589-54',
+    cargo: 'Administrador',
+  };
+
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -106,7 +127,7 @@ export default function SearchAppBar() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <Link to="/" style={{ textDecoration: 'none' }}>
+        <Link to="/dashboard" style={{ textDecoration: 'none' }}>
           <ListItem button key="Dashboard">
             <ListItemIcon>
               <AppsIcon />
@@ -115,12 +136,71 @@ export default function SearchAppBar() {
           </ListItem>
         </Link>
         <Divider />
-        <Link to="/produtos" style={{ textDecoration: 'none' }}>
-          <ListItem button key="Produtos">
+        <Link to="/produtos/cadastrar" style={{ textDecoration: 'none' }}>
+          <ListItem button key="Novo Produto">
             <ListItemIcon>
               <SportsEsportsIcon />
             </ListItemIcon>
-            <ListItemText primary="Produtos" />
+            <ListItemText primary="Novo Produto" />
+          </ListItem>
+        </Link>
+        <Link to="/produtos/listar" style={{ textDecoration: 'none' }}>
+          <ListItem button key="Listar Produtos">
+            <ListItemIcon>
+              <ListIcon />
+            </ListItemIcon>
+            <ListItemText primary="Listar Produtos" />
+          </ListItem>
+        </Link>
+        <Divider />
+        <Link to={'/categorias/cadastrar'} style={{ textDecoration: 'none' }}>
+          <ListItem button key="Nova Categoria">
+            <ListItemIcon>
+              <LabelOffIcon />
+            </ListItemIcon>
+            <ListItemText primary="Nova Categoria" />
+          </ListItem>
+        </Link>
+        <Link to="/categorias/listar" style={{ textDecoration: 'none' }}>
+          <ListItem button key="Listar Categorias">
+            <ListItemIcon>
+              <ListAltIcon />
+            </ListItemIcon>
+            <ListItemText primary="Listar Categorias  " />
+          </ListItem>
+        </Link>
+        <Divider />
+        <Link to="/fornecedores/cadastrar" style={{ textDecoration: 'none' }}>
+          <ListItem button key="Novo Fornecedor">
+            <ListItemIcon>
+              <ContactMailIcon />
+            </ListItemIcon>
+            <ListItemText primary="Novo Fornecedor" />
+          </ListItem>
+        </Link>
+        <Link to="/fornecedores/listar" style={{ textDecoration: 'none' }}>
+          <ListItem button key="Listar Fornecedores">
+            <ListItemIcon>
+              <ViewListIcon />
+            </ListItemIcon>
+            <ListItemText primary="Listar Fornecedores" />
+          </ListItem>
+        </Link>
+        <Divider />
+        <Link to="/usuarios/cadastrar" style={{ textDecoration: 'none' }}>
+          <ListItem button key="Novo Usuário">
+            <ListItemIcon>
+              <PersonAddIcon />
+            </ListItemIcon>
+            <ListItemText primary="Novo Usuário" />
+          </ListItem>
+        </Link>
+        <Link to="/usuarios/listar" style={{ textDecoration: 'none' }}>
+          <ListItem button key="Listar Usuários">
+            <ListItemIcon>
+              <PeopleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Listar Usuários" />
           </ListItem>
         </Link>
       </List>
@@ -154,19 +234,9 @@ export default function SearchAppBar() {
           <Typography className={classes.title} variant="h6" noWrap>
             Appstock - Estoque de Produtos
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
+          <Typography className={classes.clockTitle} noWrap>
+            <Clock usuario={usuario} />
+          </Typography>
           <SwipeableDrawer
             open={state.left}
             onClose={toggleDrawer('left', true)}

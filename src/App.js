@@ -1,22 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import ProdutoForm from './modules/produto/ProdutoForm';
 import LoginForm from './modules/login/LoginForm';
-import Dashboard from './modules/dashboard/Dashboard';
-import AppBar from './AppBar';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import AppInitializer from './modules/AppInitializer';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import history from './history';
+import Security from './modules/auth/Security';
 
-function App() {
-  return (
-    <BrowserRouter>
-      <AppBar />
-      <Switch>
-        <Route path="/" exact={true} component={Dashboard} />
-        <Route path="/produtos" exact={true} component={ProdutoForm} />
-        <Route path="/login" exact={true} component={LoginForm} />
-      </Switch>
-    </BrowserRouter>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAuth: false,
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <BrowserRouter history={history}>
+          <Switch>
+            <Route exact path="/login" component={LoginForm} />
+            <Route exact path="/" component={AppInitializer}>
+              <Link to="/dashboard" />
+            </Route>
+            <Security />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    );
+  }
 }
 
 export default App;
