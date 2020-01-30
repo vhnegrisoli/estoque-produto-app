@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import LoginForm from './modules/login/LoginForm';
 import AppInitializer from './modules/AppInitializer';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-import history from './history';
-import Security from './modules/auth/Security';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
@@ -17,13 +15,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <BrowserRouter history={history}>
+        <BrowserRouter>
           <Switch>
             <Route exact path="/login" component={LoginForm} />
-            <Route exact path="/" component={AppInitializer}>
-              <Link to="/dashboard" />
-            </Route>
-            <Security />
+            <Route path="/" component={AppInitializer} />
           </Switch>
         </BrowserRouter>
       </div>

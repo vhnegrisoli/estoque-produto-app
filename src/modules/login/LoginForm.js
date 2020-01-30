@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardContent';
+import history from './../../history';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,6 +27,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function LoginForm() {
   const classes = useStyles();
+
+  function login(e) {
+    e.preventDefault();
+    console.log('CHEGUEI');
+    localStorage.setItem('token', 'Bearer token');
+    history.push('/dashboard');
+  }
 
   return (
     <div>
@@ -50,7 +58,7 @@ export default function LoginForm() {
           </form>
         </CardContent>
         <CardActions>
-          <Button>Entrar</Button>
+          <Button onClick={e => login(e)}>Entrar</Button>
         </CardActions>
       </Card>
     </div>

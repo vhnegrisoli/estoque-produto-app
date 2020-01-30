@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AppBar from './../AppBar';
 import ProdutoForm from './produto/ProdutoForm';
 import Dashboard from './dashboard/Dashboard';
-
+import Security from './auth/Security';
 export default class AppInitializer extends Component {
   render() {
     return (
@@ -14,6 +14,7 @@ export default class AppInitializer extends Component {
             <Route path="/dashboard" exact={true} component={Dashboard} />
             <Route path="/produtos/cadastrar" exact={true} component={ProdutoForm} />
           </Switch>
+          <Security />
         </BrowserRouter>
       </div>
     );
