@@ -24,7 +24,10 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import PeopleIcon from '@material-ui/icons/People';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import ViewListIcon from '@material-ui/icons/ViewList';
+import history from './history';
 
+const TOKEN = 'token';
+const LOGIN = '/login';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -97,6 +100,14 @@ const useStyles = makeStyles(theme => ({
 
 export default function SearchAppBar() {
   const classes = useStyles();
+
+  function logout() {
+    let token = localStorage.getItem(TOKEN);
+    if (token) {
+      localStorage.removeItem(TOKEN);
+    }
+    history.push(LOGIN);
+  }
 
   const usuario = {
     nome: 'Victor Hugo Negrisoli',
@@ -207,7 +218,7 @@ export default function SearchAppBar() {
       <Divider />
       <List>
         <Link to="/login" style={{ textDecoration: 'none' }}>
-          <ListItem button key="Logout">
+          <ListItem button key="Logout" onClick={() => logout()}>
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>

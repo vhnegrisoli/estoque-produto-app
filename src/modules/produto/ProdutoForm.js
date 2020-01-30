@@ -14,6 +14,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,10 +39,35 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     minWidth: '100%',
   },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paperModal: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
 
 export default function ProdutoForm() {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const [produto, setProduto] = React.useState({});
+
+  const onChange = e => {
+    setProduto({ ...produto, [e.target.name]: e.target.value });
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div className={classes}>
@@ -66,25 +94,29 @@ export default function ProdutoForm() {
                   <div>
                     <TextField
                       required
+                      name="nome"
                       id="standard-required"
                       label="Nome do Produto"
-                      defaultValue="Digite o nome do produto"
+                      onChange={e => onChange(e)}
                     />
                   </div>
                   <div>
                     <TextField
                       required
+                      name="descricao"
                       id="standard-disabled"
                       label="Descrição do Produto"
-                      defaultValue="Digite a descrição do produto"
+                      onChange={e => onChange(e)}
                     />
                   </div>
                   <FormControl className={classes.formControl}>
                     <InputLabel id="demo-simple-select-helper-label">Categoria</InputLabel>
                     <Select
                       required
+                      name="categoriaId"
                       labelId="demo-simple-select-helper-label"
                       id="demo-simple-select-helper"
+                      onChange={e => onChange(e)}
                     >
                       <MenuItem value=""></MenuItem>
                       <MenuItem value={1}>Livros</MenuItem>
@@ -97,8 +129,10 @@ export default function ProdutoForm() {
                     <TextField
                       id="standard-number"
                       label="Preço"
+                      name="preco"
                       type="number"
                       defaultValue="0.00"
+                      onChange={e => onChange(e)}
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -107,12 +141,33 @@ export default function ProdutoForm() {
                 </form>
               </CardContent>
               <CardActions>
-                <Button color="primary">Salvar Produto</Button>
+                <Button onClick={() => handleOpen()} color="primary">
+                  Salvar Produto
+                </Button>
               </CardActions>
             </Card>
           </Grid>
         </Grid>
       </Container>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paperModal}>
+            <h2 id="transition-modal-title">Dados do Produto</h2>
+            <p id="transition-modal-description">{JSON.stringify(produto)}</p>
+          </div>
+        </Fade>
+      </Modal>
     </div>
   );
 }
