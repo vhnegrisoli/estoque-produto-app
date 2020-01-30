@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import history from './../../history';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -67,6 +68,13 @@ export default function ProdutoForm() {
 
   const handleClose = () => {
     setOpen(false);
+    if (produto.nome) {
+      history.push('/dashboard');
+    }
+  };
+
+  const isValid = () => {
+    return !produto.nome || !produto.descricao || !produto.preco || !produto.categoriaId;
   };
 
   return (
@@ -141,7 +149,7 @@ export default function ProdutoForm() {
                 </form>
               </CardContent>
               <CardActions>
-                <Button onClick={() => handleOpen()} color="primary">
+                <Button disabled={isValid()} onClick={() => handleOpen()} color="primary">
                   Salvar Produto
                 </Button>
               </CardActions>
