@@ -4,7 +4,7 @@ const TOKEN = 'token';
 const BEARER = 'bearer ';
 const LOGIN = '/login';
 
-export default function CheckToken(props) {
+export default function CheckToken() {
   let token = localStorage.getItem(TOKEN);
   if (!token) {
     history.push(LOGIN);

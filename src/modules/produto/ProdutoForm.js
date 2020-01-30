@@ -74,8 +74,48 @@ export default function ProdutoForm() {
   };
 
   const isValid = () => {
-    return !produto.nome || !produto.descricao || !produto.preco || !produto.categoriaId;
+    return (
+      !produto.nome ||
+      !produto.descricao ||
+      !produto.preco ||
+      !produto.categoriaId ||
+      !produto.fornecedorId
+    );
   };
+
+  const categoriaList = [
+    {
+      id: 1,
+      descricao: 'Livros',
+    },
+    {
+      id: 2,
+      descricao: 'Quadrinhos',
+    },
+    {
+      id: 3,
+      descricao: 'Filmes',
+    },
+    {
+      id: 4,
+      descricao: 'Jogos',
+    },
+  ];
+
+  const fornecedorList = [
+    {
+      id: 1,
+      nome: 'Panini Comics',
+    },
+    {
+      id: 2,
+      nome: 'DC Comics',
+    },
+    {
+      id: 3,
+      nome: 'Marvel Comics',
+    },
+  ];
 
   return (
     <div className={classes}>
@@ -119,20 +159,24 @@ export default function ProdutoForm() {
                   </div>
                   <FormControl className={classes.formControl}>
                     <InputLabel id="demo-simple-select-helper-label">Categoria</InputLabel>
-                    <Select
-                      required
-                      name="categoriaId"
-                      labelId="demo-simple-select-helper-label"
-                      id="demo-simple-select-helper"
-                      onChange={e => onChange(e)}
-                    >
-                      <MenuItem value=""></MenuItem>
-                      <MenuItem value={1}>Livros</MenuItem>
-                      <MenuItem value={2}>Jogos</MenuItem>
-                      <MenuItem value={3}>Quadrinhos</MenuItem>
+                    <Select name="categoriaId" onChange={e => onChange(e)}>
+                      {categoriaList.map(categoria => (
+                        <MenuItem value={categoria.id}>{categoria.descricao}</MenuItem>
+                      ))}
                     </Select>
                     <FormHelperText>Selecione qual a categoria do produto</FormHelperText>
                   </FormControl>
+                  <div>
+                    <FormControl className={classes.formControl}>
+                      <InputLabel id="demo-simple-select-helper-label">Fornecedor</InputLabel>
+                      <Select name="fornecedorId" onChange={e => onChange(e)}>
+                        {fornecedorList.map(fornecedor => (
+                          <MenuItem value={fornecedor.id}>{fornecedor.nome}</MenuItem>
+                        ))}
+                      </Select>
+                      <FormHelperText>Selecione qual a categoria do produto</FormHelperText>
+                    </FormControl>
+                  </div>
                   <div>
                     <TextField
                       id="standard-number"
